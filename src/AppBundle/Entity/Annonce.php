@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Annonce
  *
- * @ORM\Table(name="annonce")
+ * @ORM\Table(name="ann_annonce")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\AnnonceRepository")
  */
 class Annonce
@@ -15,7 +15,7 @@ class Annonce
     /**
      * @var int
      *
-     * @ORM\Column(name="id", type="integer")
+     * @ORM\Column(name="ann_oid", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
@@ -24,37 +24,55 @@ class Annonce
     /**
      * @var string
      *
-     * @ORM\Column(name="titre", type="string", length=255)
+     * @ORM\Column(name="ann_titre", type="string", length=255)
      */
     private $titre;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="photo", type="string", length=255)
+     * @ORM\Column(name="ann_photo", type="string", length=255)
      */
     private $photo;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="nbPiece", type="integer")
+     * @ORM\Column(name="ann_nb_piece", type="integer")
      */
     private $nbPiece;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="prix", type="integer")
+     * @ORM\Column(name="ann_prix", type="integer")
      */
     private $prix;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="description", type="text")
+     * @ORM\Column(name="ann_description", type="text")
      */
     private $description;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Admin")
+     * @ORM\JoinColumn(name="adm_oid", referencedColumnName="adm_oid")
+     */
+    private $admin;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Client")
+     * @ORM\JoinColumn(name="cli_oid", referencedColumnName="cli_oid")
+     */
+    private $client;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="TypeAnnonce")
+     * @ORM\JoinColumn(name="typ_oid", referencedColumnName="typ_oid")
+     */
+    private $typeAnnonce;
 
 
     /**
