@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Annonces{% endblock %}
+
+{% block body %}
+
+    <h1>Annonces</h1>
+
+
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    {{ form_end(form) }}
+
+    <table>
+        <tr>
+            <td>Titre</td>
+            <td>Pièces</td>
+            <td>Prix</td>
+        </tr>
+        {% for annonce in annonces %}
+
+            <tr>
+                <td>{{ annonce.titre }}</td>
+                <td>{{ annonce.nbPiece }}</td>
+                <td>{{ annonce.prix }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+
+{% endblock %}

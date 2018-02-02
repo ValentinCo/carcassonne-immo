@@ -3,14 +3,17 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use FOS\UserBundle\Model\User as BaseUser;
+
+
+
+
 
 /**
- * Admin
- *
- * @ORM\Table(name="adm_admin")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\AdminRepository")
+ * @ORM\Entity
+ * @ORM\Table(name="adm_admin")  
  */
-class Admin
+class Admin extends BaseUser
 {
     /**
      * @var int
@@ -19,7 +22,7 @@ class Admin
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string
@@ -124,5 +127,10 @@ class Admin
     {
         return $this->telephone;
     }
-}
+    
+    public function __toString()
+    {
+        return $this->getNom(). " ". $this->getPrenom();
+    }
 
+}
