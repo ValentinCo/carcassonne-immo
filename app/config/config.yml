@@ -114,6 +114,26 @@ easy_admin:
                     - { property: 'nom', label: 'Type' }
         Annonce:
             class: AppBundle\Entity\Annonce
+            list:
+                fields:
+                    - { property: 'photo', type: 'image', base_path: '/annonces/photos' }
+                    - titre
+                    - nbPiece
+                    - prix
+                    - admin
+                    - client
+                    - typeAnnonce
+            form:
+                fields:
+                    - titre
+                    - nbPiece
+                    - prix
+                    - description
+                    - admin
+                    - client
+                    - typeAnnonce
+                    - { property: 'photoFile', type: 'vich_image'}
+
 
 assetic:
     debug:          "%kernel.debug%"
@@ -181,5 +201,11 @@ assetic:
 
             output: "fonts/glyphicons-halflings-regular.woff"
 
-
+vich_uploader: 
+    db_driver: orm 
+    mappings: 
+        photo: 
+            uri_prefix: /annonces/photos 
+            upload_destination: '%kernel.root_dir%/../web/annonces/photos' 
+            namer: vich_uploader.namer_uniqid
 

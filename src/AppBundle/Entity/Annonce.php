@@ -3,12 +3,16 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Annonce
  *
  * @ORM\Table(name="ann_annonce")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\AnnonceRepository")
+ * @Vich\Uploadable
  */
 class Annonce
 {
@@ -34,6 +38,27 @@ class Annonce
      * @ORM\Column(name="ann_photo", type="string", length=255)
      */
     private $photo;
+
+    /**
+     * @Vich\UploadableField(mapping="photo", fileNameProperty="photo")
+     * @Assert\Image(
+     *   maxSize = "3500K",
+     *   mimeTypes = {"image/jpeg", "image/png"},
+     *   mimeTypesMessage = "Le fichier choisi ne correspond pas à un fichier valide",
+     *   notFoundMessage = "Le fichier n'a pas été trouvé sur le disque",
+     *   uploadErrorMessage = "Erreur dans l'upload du fichier",
+     *   maxSizeMessage = "Le fichier est trop volumineux"
+     * )
+     * @var File
+     */
+    private $photoFile;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     *
+     * @var \DateTime
+     */
+    private $updatedAt;
 
     /**
      * @var int
@@ -276,5 +301,51 @@ class Annonce
     {
         return $this->typeAnnonce;
     }
+
+    /**
+     * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile
+     *
+     * @return Photo
+     */
+    public function setPhotoFile(File $photo = null)
+    {
+        $this->photoFile = $photo;
+
+        if ($photo)
+            $this->updatedAt = new \DateTimeImmutable();
+
+        return $this;
+    }
+    /**
+     * @return File|null
+     */
+    public function getPhotoFile()
+    {
+        return $this->photoFile;
+    }
     
+
+    /**
+     * Set updatedAt
+     *
+     * @param \DateTime $updatedAt
+     *
+     * @return Annonce
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * Get updatedAt
+     *
+     * @return \DateTime
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
 }
