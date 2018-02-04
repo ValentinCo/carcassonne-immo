@@ -38,11 +38,6 @@ class AnnonceController extends Controller
         ->add('rechercher', SubmitType::class)
         ->getForm();
 
-        
-
-    
-
-
         $form->handlerequest($request);
 
         if($form->isValid() && $form->isSubmitted()){
@@ -77,6 +72,20 @@ class AnnonceController extends Controller
             
         ));
         
+    }
+
+    /**
+     *@Route("/annonce/{id}", name="annonce_details", requirements={"page"="\d+"})
+     */
+    public function detailsAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $section = $em->getRepository('AppBundle:Annonce')->find($id);
+
+        return $this->render('annonce/details.html.twig', array(
+            'section' => $section,
+        ));
     }
 
     
