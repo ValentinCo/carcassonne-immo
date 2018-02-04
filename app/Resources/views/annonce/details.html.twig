@@ -2,5 +2,21 @@
 {% block title %}Annonce{% endblock %}
 
 {% block body %}
-<h1>Nani ?</h1>
+
+    <div class="text-center">
+        <img src="{{ vich_uploader_asset(section, 'photoFile') }}" height="300px" width="500px" alt="Photo de l'annonce">
+    </div>
+
+    <h3>{{ section.titre }}</h3>
+
+    <ul>
+        <li>prix:
+            {{ section.prix }} €
+        </li>
+        <li>Nombre de pièces:
+            {{ section.nbPiece }}
+        </li>
+    </ul>
+    <p>{{ section.description }}</p>
+
 {% endblock %}

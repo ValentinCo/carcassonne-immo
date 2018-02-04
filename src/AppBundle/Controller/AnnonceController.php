@@ -33,7 +33,8 @@ class AnnonceController extends Controller
         $annonces = $em->getRepository('AppBundle:Annonce')->findAll();
 
         $form = $this->createFormBuilder()
-        ->add('recherche', Searchtype::class, array('required' => false))
+        ->add('recherche', Searchtype::class, array('required' => false,
+        'attr' => array('placeholder' => 'Recherche')))
         ->add('selecteur', ChoiceType::class, array('choices' => $choice))
         ->add('rechercher', SubmitType::class)
         ->getForm();
@@ -87,6 +88,8 @@ class AnnonceController extends Controller
             'section' => $section,
         ));
     }
+
+    
 
     
 }

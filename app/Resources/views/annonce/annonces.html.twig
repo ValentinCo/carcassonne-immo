@@ -1,26 +1,39 @@
-{% extends 'base.html.twig' %} {% block title %}Annonces{% endblock %} {% block body %}
+{% extends 'base.html.twig' %}
+{% block title %}Annonces{% endblock %}
+{% block body %}
 
-<h1>Annonces</h1>
+    <h1>Annonces</h1>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-offset-4 col-md-4">
+                {{ form_start(form) }}
+                <div class="text-center">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">Filtre</div>
+                        <div class="panel-body">{{ form_widget(form) }}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{ form_end(form) }}
 
+    <table>
+        <tr>
+            <td>Titre</td>
+            <td>Pièces</td>
+            <td>Prix</td>
+        </tr>
+        {% for annonce in annonces %}
 
-{{ form_start(form) }} {{ form_widget(form) }} {{ form_end(form) }}
-
-<table>
-    <tr>
-        <td>Titre</td>
-        <td>Pièces</td>
-        <td>Prix</td>
-    </tr>
-    {% for annonce in annonces %}
-
-    <tr>
-        <td>
-            <a href="{{ path('annonce_details', {'id': annonce.id}) }}">{{ annonce.titre }}</a>
-        </td>
-        <td>{{ annonce.nbPiece }}</td>
-        <td>{{ annonce.prix }}</td>
-    </tr>
-    {% endfor %}
-</table>
+            <tr>
+                <td>
+                    <a href="{{ path('annonce_details', {'id': annonce.id}) }}">{{ annonce.titre }}</a>
+                </td>
+                <td>{{ annonce.nbPiece }}</td>
+                <td>{{ annonce.prix }}</td>
+            </tr>
+        {% endfor %}
+    </table>
 
 {% endblock %}
