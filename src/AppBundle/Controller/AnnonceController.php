@@ -34,8 +34,10 @@ class AnnonceController extends Controller
 
         $form = $this->createFormBuilder()
         ->add('recherche', Searchtype::class, array('required' => false,
+        'label' => ' ',
         'attr' => array('placeholder' => 'Recherche')))
-        ->add('selecteur', ChoiceType::class, array('choices' => $choice))
+        ->add('selecteur', ChoiceType::class, array('choices' => $choice,
+        'label' => ' '))
         ->add('rechercher', SubmitType::class)
         ->getForm();
 

@@ -134,7 +134,6 @@ easy_admin:
                     - typeAnnonce
                     - { property: 'photoFile', type: 'vich_image'}
 
-
 assetic:
     debug:          "%kernel.debug%"
     use_controller: false

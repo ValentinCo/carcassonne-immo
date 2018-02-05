@@ -2,7 +2,7 @@
 {% block title %}Annonces{% endblock %}
 {% block body %}
 
-    <h1>Annonces</h1>
+    <h1 class="page-header text-center">Annonces</h1>
     <div class="container">
         <div class="row">
             <div class="col-md-offset-4 col-md-4">
@@ -10,30 +10,32 @@
                 <div class="text-center">
                     <div class="panel panel-default">
                         <div class="panel-heading">Filtre</div>
-                        <div class="panel-body">{{ form_widget(form) }}</div>
+                        <div class="panel-body">
+                            <ul class="list-unstyled">
+                                <li class="form-group">{{ form_widget(form.recherche, {'attr' : {'class': 'form-control'}}) }}</li>
+
+                                <li class="form-group">{{ form_widget(form.selecteur, {'attr' : {'class': 'form-control'}}) }}</li>
+
+                                <li class="form-group">{{ form_widget(form.rechercher, {'attr' : {'class': 'form-control btn btn-success'}}) }}</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
     {{ form_end(form) }}
-
-    <table>
-        <tr>
-            <td>Titre</td>
-            <td>Pièces</td>
-            <td>Prix</td>
+    
+    {% for annonce in annonces %}
+        <ul class="list-unstyled list-inline">
+            <li class="form-group">
+                <a href="{{ path('annonce_details', {'id': annonce.id}) }}">{{ annonce.titre }}</a>
+            </li>
+            <li>{{ annonce.nbPiece }} Pièces</li>
+            <li>{{ annonce.prix }} €</ti>
         </tr>
-        {% for annonce in annonces %}
-
-            <tr>
-                <td>
-                    <a href="{{ path('annonce_details', {'id': annonce.id}) }}">{{ annonce.titre }}</a>
-                </td>
-                <td>{{ annonce.nbPiece }}</td>
-                <td>{{ annonce.prix }}</td>
-            </tr>
-        {% endfor %}
-    </table>
+</ul>
+{% endfor %}
+</table>
 
 {% endblock %}
