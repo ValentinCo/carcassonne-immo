@@ -8,12 +8,13 @@
         </title>
         {% block stylesheets %}
             <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}">
+            <link rel="stylesheet" href="{{ asset('css/annonce.css') }}">
         {% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
     </head>
 
     {% include('navBar.html.twig') %}
-    
+
     <body>
         {% block body %}{% endblock %}
         {% block javascripts %}

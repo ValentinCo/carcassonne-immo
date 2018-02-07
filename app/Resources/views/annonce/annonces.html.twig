@@ -25,17 +25,26 @@
         </div>
     </div>
     {{ form_end(form) }}
-    
-    {% for annonce in annonces %}
-        <ul class="list-unstyled list-inline">
-            <li class="form-group">
-                <a href="{{ path('annonce_details', {'id': annonce.id}) }}">{{ annonce.titre }}</a>
-            </li>
-            <li>{{ annonce.nbPiece }} Pièces</li>
-            <li>{{ annonce.prix }} €</ti>
-        </tr>
-</ul>
-{% endfor %}
-</table>
+
+    <div class="index-content">
+        {% for annonce in annonces %}
+            <div class="col-xs-4">
+                <div class="card text-center marginBot">
+                    <img src="{{ vich_uploader_asset(annonce, 'photoFile') }}" width="100px" height="200px" alt="Photo de l'annonce">
+                    <h4>
+                        <a href="{{ path('annonce_details', {'id': annonce.id}) }}">{{ annonce.titre }}</a>
+                    </h4>
+                    <div class="row ">
+
+                        <p class="col-xs-4 text-center">
+                            <span class="blue-button">{{ annonce.nbPiece }} pièces</span></p>
+                        <p class="col-xs-4 text-center">
+                            <span class="blue-button">{{ annonce.prix }} €</span></p>
+
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
 
 {% endblock %}
